@@ -1,5 +1,5 @@
 const db = require('../database/db');
-require('dotenv').config();
+require("dotenv").config()
 
 class Screen {
     // constructor

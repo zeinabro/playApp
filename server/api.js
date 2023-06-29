@@ -5,7 +5,7 @@ require('dotenv').config()
 const screeningRoutes = require('./routers/screeningRoutes')
 const showRoutes = require('./routers/showRoutes')
 const screenRoutes = require('./routers/screenRoutes')
-const { application } = require('express')
+//const { application } = require('express')
 
 const api = express()
 
@@ -16,7 +16,7 @@ api.get('/', (req, res) => {
     res.send('Welcome to the Theatre API')
 })
 
-// api.use('/screenings', screeningRoutes)
+api.use('/screenings', screeningRoutes)
 api.use('/shows', showRoutes)
 api.use('/screens', screenRoutes)
 
