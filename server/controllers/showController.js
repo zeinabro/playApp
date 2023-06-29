@@ -8,8 +8,19 @@ const getAll = async (req,res) => {
         res.status(500).json({
             error: err,
             message: 'Failed to fetch shows'})
-        //console.log(err)
     }
 }
 
-module.exports = { getAll }
+const getOne = async(req,res) => {
+    try {
+        const id = parseInt(req.params.id)
+        const show = await Shows.getOne(id)
+        res.json(show)
+    } catch (err) {
+        res.status(500).json({
+            error: err,
+            message: 'Failed to fetch shows'})
+    }
+}
+
+module.exports = { getAll, getOne }
