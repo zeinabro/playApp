@@ -1,4 +1,5 @@
 const db = require('../database/db')
+require("dotenv").config()
 
 class Screenings {
     //constructor
