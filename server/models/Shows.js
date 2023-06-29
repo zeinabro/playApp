@@ -24,6 +24,7 @@ class Shows {
             const { rows } = await db.query(query,[id])
             return rows[0]
         } catch (err) {
+            console.log(err)
             throw new Error('Failed to fetch show')
         }
     }
