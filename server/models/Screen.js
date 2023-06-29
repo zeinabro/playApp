@@ -81,6 +81,7 @@ class Screen {
             await db.query(deleteScreeningsQuery, [screenId]);
 
             // deleting screen
+
             const deleteScreenQuery = 'DELETE FROM screens WHERE screen_id = $1 RETURNING *';
             const { rows } = await db.query(deleteScreenQuery, [screenId]);
 
