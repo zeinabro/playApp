@@ -41,4 +41,14 @@ const create = async (req,res) => {
     }
 }
 
-module.exports = { getAll, getOne, update, create }
+const destroy = async (req,res) => {
+    try {
+        const id = parseInt(req.params.id)
+        const showToDelete = await Shows.destroy(id)
+        res.status(showToDelete ? 204 : 404).json(showToDelete ? `Show with id ${id} deleted` : `Could not delete show`)
+    } catch (err) {
+        res.status(500).json({error: 'Failed to delete show'})
+    }
+}
+
+module.exports = { getAll, getOne, update, create, destroy }

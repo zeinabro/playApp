@@ -52,14 +52,23 @@ class Shows {
             }
             return rows[0]
         } catch (err) {
-            console.log(err)
             throw new Error('Failed to update show')
         }
     }
 
     //delete one
-    static async delete(id) {
-
+    static async destroy(id) {
+        try {
+            const query = 'DELETE FROM shows screenings WHERE show_id = $1 RETURNING *'
+            const { rows } = await db.query(query,[id])
+            if (rows == 0) {
+                throw new Error('Could not find show')
+            }
+            return rows[0]
+        } catch (err) {
+            console.log(err)
+            throw new Error('Failed to delete show')
+        }
     }
 
 }

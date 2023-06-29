@@ -28,8 +28,8 @@ CREATE TABLE screenings (
     -- date_time DATE,
     price REAL,
     remaining_seats INT,
-    show_id INT REFERENCES shows(show_id),
-    screen_id INT REFERENCES screens(screen_id)
+    show_id INT REFERENCES shows(show_id) ON DELETE CASCADE,
+    screen_id INT REFERENCES screens(screen_id) ON DELETE CASCADE
 );
 
 INSERT INTO theatre (theatre_name,address)
