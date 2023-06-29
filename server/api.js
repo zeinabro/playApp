@@ -11,6 +11,6 @@ api.get('/', (req,res) => {
     res.send('Welcome to the Theatre API')
 })
 
-app.use('/theatre', routes)
+api.use('/theatre', routes)
 
-module.exports = app
+module.exports = api
