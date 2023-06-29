@@ -31,4 +31,14 @@ const update = async (req,res) => {
     } 
 }
 
-module.exports = { getAll, getOne, update }
+const create = async (req,res) => {
+    try {
+        const data = req.body
+        const show = await Shows.create(data)
+        res.status(show ? 201 : 500).json(show ? show : {Error: 'Could not create show'})
+    } catch (err) {
+        res.status(500).json({error: 'Failed to create show'})
+    }
+}
+
+module.exports = { getAll, getOne, update, create }

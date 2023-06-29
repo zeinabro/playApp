@@ -2,12 +2,15 @@ const db = require('../database/db')
 require("dotenv").config()
 
 class Shows {
-    //constructor
-
     //create show
-    static async create() {
+    static async create(data) {
         try {
+            const {show_name, genre, rating, poster_image_url, running_time } = data
+            const values = [show_name, genre, rating, poster_image_url, running_time]
 
+            const query = 'INSERT INTO shows (show_name, genre, rating, poster_image_url, running_time) VALUES ($1,$2,$3,$4,$5) RETURNING *'
+            const { rows } = await db.query(query,values)
+            return rows[0]
         } catch (err) {
             throw new Error('Failed to create show')
         }
@@ -41,6 +44,7 @@ class Shows {
         try {
             const {show_name, genre, rating, poster_image_url, running_time } = data
             const values = [show_name, genre, rating, poster_image_url, running_time,id]
+
             const query = 'UPDATE shows SET show_name=$1,genre=$2,rating=$3,poster_image_url=$4,running_time=$5 WHERE show_id=$6 RETURNING *'
             const { rows } = await db.query(query,values)
             if (rows.length == 0) {

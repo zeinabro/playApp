@@ -16,7 +16,7 @@ CREATE TABLE shows (
     show_id SERIAL PRIMARY KEY,
     show_name VARCHAR NOT NULL,
     genre VARCHAR,
-    rating DECIMAL,
+    rating REAL,
     poster_image_url VARCHAR,
     running_time VARCHAR
 );
@@ -26,7 +26,7 @@ CREATE TABLE screenings (
     show_time TIME,
     show_date VARCHAR,
     -- date_time DATE,
-    price INT,
+    price REAL,
     remaining_seats INT,
     show_id INT REFERENCES shows(show_id),
     screen_id INT REFERENCES screens(screen_id)

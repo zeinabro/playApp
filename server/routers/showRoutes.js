@@ -5,5 +5,6 @@ const showController = require('../controllers/showController')
 router.get('/',showController.getAll)
 router.get('/:id', showController.getOne)
 router.patch('/:id', showController.update)
+router.post('/',showController.create)
 
 module.exports = router
