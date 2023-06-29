@@ -47,3 +47,32 @@ document.getElementById('edit-show-form').addEventListener('submit', async funct
     }
 });
 
+
+//can't get delete to work....
+
+// document.getElementById('delete-show-btn').addEventListener('click', async function () {
+//     if (confirm('Are you sure you want to delete this show?')) {
+//         try {
+//             const storedShow = localStorage.getItem('show');
+//             if (storedShow) {
+//                 const show = JSON.parse(storedShow);
+//                 const { show_id } = show;
+
+//                 const response = await fetch(`http://localhost:3001/shows/${show_id}`, {
+//                     method: 'DELETE'
+//                 });
+
+//                 if (!response.ok) {
+//                     throw new Error('Failed to delete show');
+//                 }
+
+//                 localStorage.removeItem('show');
+//                 window.location.href = '/client/index.html';
+//             } else {
+//                 throw new Error('No show data found');
+//             }
+//         } catch (error) {
+//             console.error('Failed to delete show:', error);
+//         }
+//     }
+// });
