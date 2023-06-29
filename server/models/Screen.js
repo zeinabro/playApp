@@ -16,10 +16,11 @@ class Screen {
             const { capacity, theatre_id } = screenData;
             const response = await db.query('INSERT INTO screens (capacity, theatre_id) VALUES ($1, $2) RETURNING *', [capacity, theatre_id]);
             const screenId = response.rows[0].screen_id;
-            const newScreen = await Screen.getOneById(screenId);
+            const newScreen = await Screen.getOne(screenId);
             return newScreen;
 
         } catch (err) {
+            console.error(err)
             throw new Error('Failed to create screen');
         }
     }
@@ -52,13 +53,14 @@ class Screen {
 
     static async update(screenId, screenData) {
         try {
-            const { capacity, theatre_id } = screenData;
-            const query = 'UPDATE screens SET capacity = $1, theatre_id = $2 WHERE screen_id = $3 RETURNING *';
-            const { rows } = await db.query(query, [capacity, theatre_id, screenId]);
+            const { capacity } = screenData;
+            const query = 'UPDATE screens SET capacity = $1 WHERE screen_id = $2 RETURNING *';
+            const { rows } = await db.query(query, [capacity, screenId]);
 
             if (rows.length === 0) {
                 throw new Error('Screen not found');
             }
+
             const updatedScreen = rows[0];
             return updatedScreen;
         } catch (err) {
@@ -68,22 +70,33 @@ class Screen {
 
 
 
+
     // delete one
 
     static async delete(screenId) {
         try {
-            const query = 'DELETE FROM screens WHERE screen_id = $1 RETURNING *';
-            const { rows } = await db.query(query, [screenId]);
+            // deleting associated screenings first
+
+            const deleteScreeningsQuery = 'DELETE FROM screenings WHERE screen_id = $1';
+            await db.query(deleteScreeningsQuery, [screenId]);
+
+            // deleting screen
+            const deleteScreenQuery = 'DELETE FROM screens WHERE screen_id = $1 RETURNING *';
+            const { rows } = await db.query(deleteScreenQuery, [screenId]);
+
             if (rows.length === 0) {
                 throw new Error('Screen not found');
             }
+
             const deletedScreen = rows[0];
             return deletedScreen;
         } catch (err) {
             throw new Error('Failed to delete screen');
         }
     }
+
 }
+
 
 
 module.exports = Screen;
