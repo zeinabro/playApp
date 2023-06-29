@@ -16,7 +16,7 @@ api.get('/', (req, res) => {
     res.send('Welcome to the Theatre API')
 })
 
-// api.use('/screenings', screeningRoutes)
+api.use('/screenings', screeningRoutes)
 api.use('/shows', showRoutes)
 api.use('/screens', screenRoutes)
 
