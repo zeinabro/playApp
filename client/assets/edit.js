@@ -1,4 +1,5 @@
 const storedShow = localStorage.getItem('show');
+
 if (storedShow) {
     const show = JSON.parse(storedShow);
     const { show_name, poster_image_url, rating, genre } = show;
@@ -9,9 +10,8 @@ if (storedShow) {
     document.getElementById('genre').value = genre;
 }
 
-document.getElementById('edit-show-form').addEventListener('submit', async function (event) {
+document.getElementById('update-show-btn').addEventListener('submit', async function (event) {
     event.preventDefault();
-
     const updatedShow = {
         show_name: document.getElementById('show-name').value,
         poster_image_url: document.getElementById('poster-url').value,
@@ -32,8 +32,6 @@ document.getElementById('edit-show-form').addEventListener('submit', async funct
                 body: JSON.stringify(updatedShow)
             });
 
-            console.log(response);
-
             if (!response.ok) {
                 throw new Error('Failed to update show information');
             }
@@ -49,6 +47,33 @@ document.getElementById('edit-show-form').addEventListener('submit', async funct
 
 
 //can't get delete to work....
+
+const deleteButton = document.getElementById('delete-show-btn')
+deleteButton.addEventListener('click', async (event) => {
+    event.preventDefault()
+    const inputs = document.querySelectorAll('input')
+    inputs.forEach(input => {
+        input.required = false
+    });
+    if(confirm('Are you sure you want to delete this show?')){
+        try {
+            const showToDelete = localStorage.getItem('show')
+            const show = JSON.parse(showToDelete)
+            const { show_id } = show
+            const resp = await fetch(`http://localhost:3001/shows/${show_id}`,{
+                method:'DELETE',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+
+            localStorage.removeItem('show');
+            window.location.href = '/client/shows.html';
+        } catch (error) {
+            console.error('Failed to delete show:', error);
+        }     
+    }
+})
 
 // document.getElementById('delete-show-btn').addEventListener('click', async function () {
 //     if (confirm('Are you sure you want to delete this show?')) {

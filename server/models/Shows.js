@@ -62,7 +62,7 @@ class Shows {
         try {
             const query = 'DELETE FROM shows WHERE show_id = $1 RETURNING *'
             const { rows } = await db.query(query,[id])
-            if (rows == 0) {
+            if (rows[0] == "") {
                 throw new Error('Could not find show')
             }
             return rows[0]
