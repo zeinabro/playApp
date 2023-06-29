@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon -L index.js",
-    "setup-db": "node ./database/setup-db.js"
+    "dev": "nodemon -L ./server/index.js",
+    "setup-db": "node ./server/database/setup-db.js"
   },
   "keywords": [],
   "author": "",
