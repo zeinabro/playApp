@@ -27,7 +27,7 @@ async function fetchShows() {
             showContainer.appendChild(showPoster);
             showContainer.appendChild(showRating);
 
-            showContainer.addEventListener('click', () => {
+            showPoster.addEventListener('click', () => {
                 editShow(show_id);
             });
 
