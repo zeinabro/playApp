@@ -59,7 +59,7 @@ class Shows {
     //delete one
     static async destroy(id) {
         try {
-            const query = 'DELETE FROM shows screenings WHERE show_id = $1 RETURNING *'
+            const query = 'DELETE FROM shows WHERE show_id = $1 RETURNING *'
             const { rows } = await db.query(query,[id])
             if (rows == 0) {
                 throw new Error('Could not find show')
