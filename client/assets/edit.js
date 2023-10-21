@@ -24,7 +24,7 @@ document.getElementById('update-show-btn').addEventListener('submit', async func
         const show = JSON.parse(storedShow);
         const showId = show.show_id;
         try {
-            const response = await fetch(`http://localhost:3001/shows/${showId}`, {
+            const response = await fetch(`https://plays-api.onrender.com/shows/${showId}`, {
                 method: 'PATCH',
                 headers: {
                     'Content-Type': 'application/json'
@@ -60,7 +60,7 @@ deleteButton.addEventListener('click', async (event) => {
             const showToDelete = localStorage.getItem('show')
             const show = JSON.parse(showToDelete)
             const { show_id } = show
-            const resp = await fetch(`http://localhost:3001/shows/${show_id}`,{
+            const resp = await fetch(`https://plays-api.onrender.com/shows/${show_id}`,{
                 method:'DELETE',
                 headers: {
                     'Content-Type': 'application/json'
@@ -83,7 +83,7 @@ deleteButton.addEventListener('click', async (event) => {
 //                 const show = JSON.parse(storedShow);
 //                 const { show_id } = show;
 
-//                 const response = await fetch(`http://localhost:3001/shows/${show_id}`, {
+//                 const response = await fetch(`https://plays-api.onrender.com/shows/${show_id}`, {
 //                     method: 'DELETE'
 //                 });
 
