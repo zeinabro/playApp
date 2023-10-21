@@ -1,6 +1,6 @@
 const showScreenings = async() => {
     try{
-        const resp = await fetch(`http://localhost:3001/screenings/`)
+        const resp = await fetch(`https://plays-api.onrender.com/screenings/`)
         if (!resp.ok) {
             throw new Error('could not fetch screenings')
         }
@@ -10,7 +10,7 @@ const showScreenings = async() => {
             const { show_time, show_date,price,remaining_seats,show_id,screen_id } = screening
 
             try {
-                const resp = await fetch(`http://localhost:3001/shows/${show_id}`)
+                const resp = await fetch(`https://plays-api.onrender.com/shows/${show_id}`)
                 const showData = await resp.json()
                 const { show_name } = showData
                 const showName = document.createElement('td')

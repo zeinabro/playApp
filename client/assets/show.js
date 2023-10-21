@@ -1,6 +1,6 @@
 async function fetchShows() {
     try {
-        const response = await fetch('http://localhost:3001/shows');
+        const response = await fetch('https://plays-api.onrender.com/shows');
         if (!response.ok) {
             throw new Error('Failed to fetch shows');
         }
@@ -40,7 +40,7 @@ async function fetchShows() {
 
 async function editShow(id) {
     try {
-        const response = await fetch(`http://localhost:3001/shows/${id}`);
+        const response = await fetch(`https://plays-api.onrender.com/shows/${id}`);
         if (!response.ok) {
             throw new Error('Failed to load show information');
         }
