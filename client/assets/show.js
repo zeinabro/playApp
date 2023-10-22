@@ -46,7 +46,7 @@ async function editShow(id) {
         }
         const show = await response.json();
         localStorage.setItem('show', JSON.stringify(show));
-        window.location.href = '/client/showinfo.html';
+        window.location.href = 'showinfo.html';
     } catch (error) {
         console.log('Failed to load show information:', error);
     }

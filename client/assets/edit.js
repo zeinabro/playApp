@@ -38,15 +38,12 @@ document.getElementById('update-show-btn').addEventListener('submit', async func
 
             localStorage.setItem('show', JSON.stringify(updatedShow));
 
-            window.location.href = '/client/showinfo.html';
+            window.location.href = 'showinfo.html';
         } catch (error) {
             console.error('Failed to update show:', error);
         }
     }
 });
-
-
-//can't get delete to work....
 
 const deleteButton = document.getElementById('delete-show-btn')
 deleteButton.addEventListener('click', async (event) => {
@@ -68,7 +65,7 @@ deleteButton.addEventListener('click', async (event) => {
             })
 
             localStorage.removeItem('show');
-            window.location.href = '/client/shows.html';
+            window.location.href = 'shows.html';
         } catch (error) {
             console.error('Failed to delete show:', error);
         }     

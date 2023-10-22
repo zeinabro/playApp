@@ -27,11 +27,11 @@ function displayShowInfo() {
         showInfoContainer.appendChild(backButton)
 
         editButton.addEventListener('click', () => {
-            window.location.href = '/client/edit.html';
+            window.location.href = 'edit.html';
         });
 
         backButton.addEventListener('click', () => {
-            window.location.href = '/client/index.html';
+            window.location.href = 'index.html';
         });
     }
 
