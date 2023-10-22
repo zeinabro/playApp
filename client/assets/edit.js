@@ -1,6 +1,7 @@
 const storedShow = localStorage.getItem('show');
 console.log(JSON.parse(storedShow))
 const run_time = JSON.parse(storedShow).running_time
+const showID = JSON.parse(storedShow).show_id
 
 if (storedShow) {
     const show = JSON.parse(storedShow);
@@ -21,7 +22,8 @@ edit_form.addEventListener('submit', async (event) => {
         poster_image_url: document.getElementById('poster-url').value,
         rating: parseFloat(document.getElementById('rating').value),
         genre: document.getElementById('genre').value,
-        running_time: run_time
+        running_time: run_time,
+        show_id: showID
     };
 
     console.log(updatedShow)
