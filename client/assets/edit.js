@@ -1,4 +1,6 @@
 const storedShow = localStorage.getItem('show');
+console.log(JSON.parse(storedShow))
+const run_time = JSON.parse(storedShow).running_time
 
 if (storedShow) {
     const show = JSON.parse(storedShow);
@@ -10,27 +12,35 @@ if (storedShow) {
     document.getElementById('genre').value = genre;
 }
 
-document.getElementById('update-show-btn').addEventListener('submit', async function (event) {
+const edit_form = document.getElementById('edit-show-form')
+edit_form.addEventListener('submit', async (event) => {
     event.preventDefault();
+
     const updatedShow = {
         show_name: document.getElementById('show-name').value,
         poster_image_url: document.getElementById('poster-url').value,
         rating: parseFloat(document.getElementById('rating').value),
-        genre: document.getElementById('genre').value
+        genre: document.getElementById('genre').value,
+        running_time: run_time
     };
+
+    console.log(updatedShow)
 
     const storedShow = localStorage.getItem('show');
     if (storedShow) {
         const show = JSON.parse(storedShow);
         const showId = show.show_id;
+    
         try {
             const response = await fetch(`https://plays-api.onrender.com/shows/${showId}`, {
                 method: 'PATCH',
                 headers: {
+                    Accept: "application/json",
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify(updatedShow)
             });
+            console.log(response)
 
             if (!response.ok) {
                 throw new Error('Failed to update show information');
@@ -40,6 +50,7 @@ document.getElementById('update-show-btn').addEventListener('submit', async func
 
             window.location.href = 'showinfo.html';
         } catch (error) {
+            alert(error)
             console.error('Failed to update show:', error);
         }
     }
@@ -71,30 +82,3 @@ deleteButton.addEventListener('click', async (event) => {
         }     
     }
 })
-
-// document.getElementById('delete-show-btn').addEventListener('click', async function () {
-//     if (confirm('Are you sure you want to delete this show?')) {
-//         try {
-//             const storedShow = localStorage.getItem('show');
-//             if (storedShow) {
-//                 const show = JSON.parse(storedShow);
-//                 const { show_id } = show;
-
-//                 const response = await fetch(`https://plays-api.onrender.com/shows/${show_id}`, {
-//                     method: 'DELETE'
-//                 });
-
-//                 if (!response.ok) {
-//                     throw new Error('Failed to delete show');
-//                 }
-
-//                 localStorage.removeItem('show');
-//                 window.location.href = '/client/index.html';
-//             } else {
-//                 throw new Error('No show data found');
-//             }
-//         } catch (error) {
-//             console.error('Failed to delete show:', error);
-//         }
-//     }
-// });

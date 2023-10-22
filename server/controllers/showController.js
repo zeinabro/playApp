@@ -23,8 +23,7 @@ const update = async (req,res) => {
     try {
         const id = parseInt(req.params.id)
         const data = req.body
-        const show = await Shows.getOne(id)
-        const updatedShow = await show.update(id,data)
+        const updatedShow = await Shows.update(id,data)
         res.status(updatedShow ? 200 : 404).json(updatedShow ? updatedShow : 
             {Error: 'Could not update show'})
     } catch (err) {
