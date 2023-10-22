@@ -7,6 +7,7 @@ function displayShowInfo() {
 
         const showTitle = document.createElement('h2');
         const showPoster = document.createElement('img');
+        showPoster.style.height = '200px'
         const showRating = document.createElement('p');
         const showGenre = document.createElement('p');
         const editButton = document.createElement('button');
@@ -17,7 +18,7 @@ function displayShowInfo() {
         showRating.textContent = `Rating: ${rating}`;
         showGenre.textContent = `Genre: ${genre}`;
         editButton.textContent = 'EDIT';
-        backButton.textContent = 'HOME';
+        backButton.textContent = 'SHOWS';
 
         showInfoContainer.appendChild(showTitle);
         showInfoContainer.appendChild(showPoster);
@@ -31,7 +32,7 @@ function displayShowInfo() {
         });
 
         backButton.addEventListener('click', () => {
-            window.location.href = 'index.html';
+            window.location.href = 'shows.html';
         });
     }
 
